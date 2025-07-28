@@ -4,7 +4,7 @@ import 'package:flutter_application_1/constants/colors.dart';
 
 class FoodItem extends StatelessWidget {
   final Food food;
-  FoodItem(this.food);
+  const FoodItem(this.food);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class FoodItem extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '\$ ',
+                        '₺ ',
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,

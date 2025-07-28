@@ -9,7 +9,7 @@ class FoodListView extends StatelessWidget {
   final PageController pageController;
   final Restaurant restaurant;
 
-  FoodListView(
+  const FoodListView(
     this.selected,
     this.callback,
     this.pageController,
@@ -24,26 +24,26 @@ class FoodListView extends StatelessWidget {
       child: PageView(
         controller: pageController,
         onPageChanged: (index) => callback(index),
-        children: category.map((e) {
-          final foods = restaurant.menu[e]!; // List<Food>
-          return ListView.separated(
-            padding: EdgeInsets.zero,
-            itemBuilder: (context, index) => GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => DetailPage(foods[index]),
-                  ),
-                );
-              },
-              child: FoodItem(
-                foods[index],
-              ),
-            ),
-            separatorBuilder: (_, index) => SizedBox(height: 15),
-            itemCount: foods.length,
-          );
-        }).toList(),
+        children:
+            category.map((e) {
+              final foods = restaurant.menu[e]!; // List<Food>
+              return ListView.separated(
+                padding: EdgeInsets.zero,
+                itemBuilder:
+                    (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => DetailPage(foods[index]),
+                          ),
+                        );
+                      },
+                      child: FoodItem(foods[index]),
+                    ),
+                separatorBuilder: (_, index) => SizedBox(height: 15),
+                itemCount: foods.length,
+              );
+            }).toList(),
       ),
     );
   }

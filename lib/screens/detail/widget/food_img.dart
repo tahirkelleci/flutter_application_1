@@ -5,20 +5,17 @@ import 'package:flutter_application_1/constants/colors.dart'; // kBackgroundColo
 class FoodImg extends StatelessWidget {
   final Food food;
 
-  FoodImg(this.food);
+  const FoodImg(this.food);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 250,
       child: Stack(
         children: [
           Column(
             children: [
-              Expanded(
-                flex: 1,
-                child: Container(),
-              ),
+              Expanded(flex: 1, child: Container()),
               Expanded(
                 flex: 1,
                 child: Container(
@@ -51,7 +48,7 @@ class FoodImg extends StatelessWidget {
               ),
               child: Image.asset(
                 food.imgUrl,
-                fit: BoxFit.cover, // ❗️DÜZELTME: 'Boxfit' → 'BoxFit'
+                fit: BoxFit.cover, 
               ),
             ),
           ),

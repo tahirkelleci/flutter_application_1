@@ -7,7 +7,7 @@ class FoodList extends StatelessWidget {
   final Function callback;
   final Restaurant restaurant;
 
-  FoodList(this.selected, this.callback, this.restaurant);
+  const FoodList(this.selected, this.callback, this.restaurant);
 
   @override
   Widget build(BuildContext context) {

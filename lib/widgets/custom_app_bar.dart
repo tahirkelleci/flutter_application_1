@@ -4,13 +4,16 @@ class CustomAppBar extends StatelessWidget {
   final IconData leftIcon;
   final IconData rightIcon;
   final Function? leftCallback;
-  final Function(String)? onSearch; // Arama fonksiyonu parametresi
+  final Function? rightCallback;
+  final Function(String)? onSearch;
 
-  CustomAppBar(
-    this.leftIcon, 
-    this.rightIcon, 
-    {this.leftCallback, this.onSearch}
-  );
+  const CustomAppBar(
+    this.leftIcon,
+    this.rightIcon, {
+    this.leftCallback,
+    this.onSearch,
+    this.rightCallback,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +27,19 @@ class CustomAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: leftCallback != null 
-              ? () => leftCallback!() 
-              : () => Navigator.pop(context),
+            onTap: leftCallback != null
+                ? () => leftCallback!()
+                : () => Navigator.pop(context),
             child: _buildIcon(leftIcon),
           ),
           GestureDetector(
             onTap: () {
-              _showSearchDialog(context);
+              
+              if (rightCallback != null) {
+                rightCallback!();
+              } else {
+                _showSearchDialog(context);
+              }
             },
             child: _buildIcon(rightIcon),
           ),
@@ -42,18 +50,18 @@ class CustomAppBar extends StatelessWidget {
 
   void _showSearchDialog(BuildContext context) {
     final TextEditingController searchController = TextEditingController();
-    
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Yemek Ara'),
-        content: Container(
+        content: SizedBox(
           width: double.maxFinite,
           child: TextField(
             controller: searchController,
             autofocus: true,
             decoration: InputDecoration(
-              hintText: 'Yemek adı yazın...',
+              hintText: 'Yemek adi yazin...',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -62,8 +70,9 @@ class CustomAppBar extends StatelessWidget {
               fillColor: Colors.grey[100],
             ),
             onSubmitted: (value) {
-              if (value.isNotEmpty && onSearch != null) {
-                onSearch!(value);
+              final trimmed = value.trim();
+              if (trimmed.isNotEmpty && onSearch != null) {
+                onSearch!(trimmed);
                 Navigator.pop(context);
               }
             },
@@ -83,13 +92,17 @@ class CustomAppBar extends StatelessWidget {
               if (searchText.isNotEmpty && onSearch != null) {
                 onSearch!(searchText);
                 Navigator.pop(context);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Lütfen bir şey yazin")),
+                );
               }
             },
-            child: Text('Ara'),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
               foregroundColor: Colors.white,
             ),
+            child: Text('Ara'),
           ),
         ],
       ),
@@ -114,7 +127,7 @@ class CustomAppBar extends StatelessWidget {
       child: Icon(
         icon,
         size: 20,
-        color: Colors.black87,
+        color: Colors.red,
       ),
     );
   }

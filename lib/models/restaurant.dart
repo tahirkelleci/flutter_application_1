@@ -1,5 +1,7 @@
 import 'package:flutter_application_1/models/food.dart';
 
+
+
 class Restaurant {
   String name;
   String waitTime;
@@ -23,18 +25,19 @@ class Restaurant {
 
   static Restaurant generateRestaurant() {
     return Restaurant(
-      'Restaurant',
-      '20-30 min',
+      'Sempati Sosyal Tesis',
+      '20-30 dakika',
       '2.4 km',
-      'Restaurant',
-      'assets/images/restaurant_logo.png',
-      'Orange sandwiches is delicious',
+      'Restoran',
+      'assets/images/sempati.jpg',
+      'En iyi yemekler burada',
       4.7,
       {
-        'Recommend': Food.generateFoodList(), // Veya ayrı metod oluştur
-        'Popular': Food.generatePopularFoodList(),
-        'Noodles': [],
-        'Pizza': [],
+        'Tavsiye': Food.generateFoodList(), 
+        'Popüler': Food.generatePopularFoodList(),
+        'Kebap' : Food.generateFavoriFoodList() ,
+        'Tatlı'  : Food.generateSweetFoodList(),
+        'İçecek': Food.generateDrinkList(),
       },
     );
   }

@@ -80,7 +80,7 @@ class RestaurantInfo extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.star_outline,
-                    color:kPrimaryColor, // ya da kendi tanımlı rengin
+                    color:kPrimaryColor, 
                   ),
                   Text(
                     '${restaurant.score}',
